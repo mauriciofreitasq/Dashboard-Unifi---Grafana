@@ -22,26 +22,47 @@ Desenvolvi este dashboard para centralizar a gestão dos ativos de rede de forma
 <img width="1918" height="1000" alt="image" src="https://github.com/user-attachments/assets/f7eeb409-0928-449d-8d78-c90e544d872c" />
 
 
-#O que este Dashboard monitora?
-Este dashboard oferece uma visão centralizada e em tempo real da saúde e performance de uma rede Wi-Fi corporativa. Ele foi desenhado para monitorar especificamente:
+# Monitoramento de Rede UniFi e Infraestrutura de TI
+Painel de gestão operacional para Switches e Access Points.
 
-Switch Principal (nome do seu switch): Monitoramento individual de cada uma das 24 portas, mostrando o status operacional (ON/DOWN) de cada interface.
-Access Points (APs): Acompanhamento detalhado de diversos pontos de acesso espalhados por setores como TI, RH, Administração entre outros.
+---
 
-#Principais Funcionalidades e Painéis:
+## Descrição do Projeto
+Este repositório contém o arquivo de configuração (JSON) de um dashboard desenvolvido no Grafana para o monitoramento centralizado de ativos de rede. O projeto integra dados coletados via Zabbix para fornecer visibilidade sobre a saúde dos dispositivos e o estado das interfaces físicas.
 
-Mapa Visual de Portas do Switch:
+O diferencial deste dashboard é a implementação de um painel de Canvas que replica a disposição física de um switch de 24 portas, permitindo diagnósticos rápidos de conectividade.
 
-Utiliza um painel de Canvas com uma imagem de fundo customizada de um Switch de 24 portas.
-Cada porta possui um indicador visual que muda de cor dinamicamente: se a porta estiver ativa, o status aparece como "ON"; se houver falha, ele destaca em vermelho como "DOWN".
+---
 
-#Saúde dos Access Points (Status em Tempo Real):
+## Funcionalidades Principais
 
-Disponibilidade (ICMP Ping): Monitora se o AP está online na rede.
-Tempo de Atividade (Uptime): Mostra há quanto tempo o hardware está ligado sem interrupções.
+* **Status das Portas (Switch):** Mapeamento visual das interfaces do Switch 01.
+    * **ON:** Indica porta operacional.
+    * **DOWN:** Indica porta desconectada ou com erro.
+* **Monitoramento de Pontos de Acesso (APs):** Cobertura de diversos setores, incluindo TI, RH, Administração, Almoxarifado, Planejamento, Sala de Reunião e CCO.
+* **Métricas de Performance:** * **Disponibilidade (ICMP):** Verificação constante de conexão.
+    * **Tempo de Atividade (Uptime):** Monitoramento de reinicializações inesperadas.
+    * **Carga de Processamento (Load):** Análise de consumo de CPU dos dispositivos de rede.
 
-Carga de Processamento: Monitora o Load Average dos APs (como no setor Almoxarifado) para identificar gargalos de performance.
+---
 
-Identificação por Setores:
+## Requisitos Técnicos
 
-O dashboard é organizado de forma que o administrador identifique instantaneamente qual setor está sofrendo com instabilidade (ex: AP-PLANEJAMENTO, AP-S.TREINAMENTO, AP-CCO).
+Para a correta importação e visualização dos dados, são necessários:
+1.  **Grafana v11.0** ou superior (compatível com o recurso de Canvas).
+2.  **Plugin Zabbix** (`alexanderzobnin-zabbix-datasource`) instalado.
+3.  **Fonte de dados (Data Source):** Instância do Zabbix configurada com os nomes de hosts e grupos correspondentes (ex: Grupo "Acess Points").
+
+---
+
+## Instruções de Instalação
+
+1.  Efetue o download do arquivo `Unifi Dash.json` presente neste repositório.
+2.  No seu ambiente Grafana, acesse o menu **Dashboards** e selecione a opção **Import**.
+3.  Carregue o arquivo JSON baixado.
+4.  Associe o dashboard à sua **Data Source do Zabbix** quando solicitado pelo sistema.
+5.  Ajuste os filtros de Host e Grupo caso a sua nomenclatura no Zabbix seja diferente da utilizada no projeto original.
+
+---
+
+Desenvolvido para fins de gestão de infraestrutura de rede.
